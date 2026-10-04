@@ -9,6 +9,8 @@ npm install
 npm run dev
 ```
 
+`npm run dev` starts the frontend only. Telegram API routes are intended to run after deploy on Vercel.
+
 ## Build
 
 ```bash
@@ -20,7 +22,7 @@ npm run build
 1. Create a bot with BotFather.
 2. Get the bot token.
 3. Get your Telegram chat ID.
-4. Add these Vercel Environment Variables:
+4. Add these Vercel Environment Variables in Project Settings:
 
 ```txt
 TELEGRAM_BOT_TOKEN

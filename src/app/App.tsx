@@ -512,8 +512,8 @@ function SuccessScreen({ onReset }: { onReset: () => void }) {
         >
           <Heart fill="currentColor" />
         </motion.div>
-        <h2 className="font-serif text-4xl leading-tight text-[#4a1629] sm:text-6xl">Онда бұл кеш ерекше болсын</h2>
-        <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-[#6d3145]">Таңдауың сақталды. Енді бұл кездесуді асыға күтемін.</p>
+        <h2 className="font-serif text-4xl leading-tight text-[#4a1629] sm:text-6xl">Енді бұл кездесуді асыға күтемін.</h2>
+        {/* <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-[#6d3145]">Таңдауың сақталды. Енді бұл кездесуді асыға күтемін.</p> */}
         <Button variant="secondary" onClick={onReset} className="mt-9 border-rose/30 bg-white/70 text-[#5b1b32] hover:bg-white">
           Қайта бастау
         </Button>

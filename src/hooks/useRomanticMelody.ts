@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const trackUrl = '/Sadraddin-Menin-adamym.mp3';
+const trackUrl = './Sadraddin-Menin-adamym.mp3';
 const softVolume = 0.16;
 
 export function useRomanticMelody(active: boolean) {

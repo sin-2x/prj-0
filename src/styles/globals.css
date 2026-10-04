@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  background: #fff3ea;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #fff3ea;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 213, 225, 0.92), transparent 32%),
+    radial-gradient(circle at 82% 14%, rgba(255, 244, 200, 0.72), transparent 30%),
+    linear-gradient(135deg, #fff8ef 0%, #ffdbe5 44%, #f7b9c9 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(183, 82, 112, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

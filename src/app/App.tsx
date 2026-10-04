@@ -176,7 +176,7 @@ export function App() {
                 <Music2 size={15} /> music on
               </motion.div>
               <h2 className="font-serif text-[2rem] leading-tight text-[#4a1629] sm:text-6xl">
-                Сізді бір әдемі кездесуге шақырсам қалай болады? 🥺👉👈
+                Сізді бір әдемі кездесуге шақырсам қалай болады? 🥹👉👈
               </h2>
               <p className="mt-3 text-lg font-semibold text-[#8a3650] sm:mt-5 sm:text-xl">Жоқ демесеңіз.. 🥹❤️</p>
               <div className="mt-6 flex w-full flex-col items-center gap-3 sm:mt-10 sm:gap-4">

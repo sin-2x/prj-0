@@ -66,6 +66,12 @@ export function App() {
     }).catch(() => undefined);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [state.step]);
+
   const goBack = () => {
     const previous = backMap[state.step];
     if (previous) setStep(previous);
@@ -208,7 +214,7 @@ export function App() {
 
         {state.step === 'date' && (
           <PageTransition key="date">
-            <Panel icon={<CalendarDays />} title="Кездесу күнін таңдайық" subtitle="10.10.2026 күнінен бастап әдемі бір күнді белгілейміз.">
+            <Panel icon={<CalendarDays />} title="Айналу күнін таңдайық" subtitle="10.10.2026 күнінен бастап әдемі бір күнді белгілейміз.">
               <CalendarPicker selectedDate={state.date} onSelect={(date) => patch({ date })} />
               <Button disabled={!state.date || state.date < MIN_DATE} onClick={() => setStep('time')} className="mt-6 w-full bg-[#5b1b32] text-white hover:bg-[#6d203c]">
                 Уақытқа өту <ArrowRight size={17} />
@@ -219,7 +225,7 @@ export function App() {
 
         {state.step === 'time' && (
           <PageTransition key="time">
-            <Panel icon={<Clock />} title="Қай уақытта ыңғайлы?" subtitle="Кештің ең әдемі сәтін таңдайық.">
+            <Panel icon={<Clock />} title="Қай уақыт айналуға ыңғайлы?" subtitle="Уақытты таңдаңыз">
               <div className="grid gap-2 sm:grid-cols-2 sm:gap-3">
                 {timeOptions.map((time) => (
                   <button
@@ -266,9 +272,9 @@ export function App() {
                       {food.image && <img src={food.image} alt={food.title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />}
                       <div className="absolute inset-0 bg-gradient-to-t from-[#3f1023]/70 via-transparent to-transparent" />
                       <span className="absolute left-4 top-4 rounded-full bg-white/80 px-3 py-2 text-2xl shadow-sm backdrop-blur-md">{food.icon}</span>
-                      <span className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/18 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md">
-                        таңдасаңыз, кеш жұмсақ басталады
-                      </span>
+                      {/* <span className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/18 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md">
+                        өзіңізге ұнағанын таңдаңыз
+                      </span> */}
                       {state.foodIds.includes(food.id) && (
                         <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-[#5b1b32] text-white">
                           <Check size={18} />
@@ -294,9 +300,9 @@ export function App() {
         {state.step === 'restaurant' && (
           <PageTransition key="restaurant">
             <div className="mx-auto w-full max-w-6xl">
-              <Header icon={<Sparkles />} title="Қай жерде кездесеміз?" subtitle="Әр орынның өз атмосферасы бар. Біреуін таңдайық." />
+              <Header icon={<Sparkles />} title="Қай ресторанда тамақтанамыз?" subtitle="Әр орынның өз атмосферасы бар. Біреуін таңдайық." />
               <p className="mx-auto mt-5 max-w-2xl rounded-[1.4rem] border border-white/70 bg-white/60 px-5 py-4 text-center text-base font-semibold leading-7 text-[#6d3145] shadow-sm backdrop-blur-xl">
-                Бір жерге барып, жай ғана бірге тамақтанып, әдемі әңгімелесіп қайтармыз.
+                Бір жерге барып, жай ғана бірге тамақтанып, әңгімелесіп айналып қайтармыз.
               </p>
               <div className="mt-8 grid gap-5 lg:grid-cols-3">
                 {restaurants.map((restaurant) => (
@@ -311,9 +317,9 @@ export function App() {
                     <div className="relative aspect-[4/3] overflow-hidden bg-rose/20">
                       <img src={restaurant.image} alt={restaurant.name} className="h-full w-full object-cover transition duration-700 hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#3f1023]/58 via-transparent to-transparent" />
-                      <span className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/18 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md">
+                      {/* <span className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/18 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur-md">
                         тек екеумізге арналған атмосфера
-                      </span>
+                      </span> */}
                     </div>
                     <div className="p-5">
                       <div className="flex items-center justify-between gap-3">
@@ -321,9 +327,9 @@ export function App() {
                         {state.restaurantId === restaurant.id && <Check className="text-[#5b1b32]" size={21} />}
                       </div>
                       <p className="mt-2 text-xs uppercase tracking-[0.14em] text-[#9b5368]">{restaurant.address}</p>
-                      <p className="mt-3 inline-flex rounded-full bg-[#fff1f6] px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[#8a3650]">
+                      {/* <p className="mt-3 inline-flex rounded-full bg-[#fff1f6] px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-[#8a3650]">
                         осы кешке жарасады
-                      </p>
+                      </p> */}
                     </div>
                   </button>
                 ))}
@@ -373,7 +379,7 @@ export function App() {
 
         {false && state.step === 'summary' && (
           <PageTransition key="summary">
-            <Panel icon={<Heart />} title="Кездесуіміз дайын" subtitle="Таңдауларың бәрі осында. Енді тек растау қалды.">
+            <Panel icon={<Heart />} title="Рақмеет" subtitle="Таңдауларың бәрі осында. Кнопканы басып жіберіңіз">
               <SummaryRow label="Күн" value={formatDate(state.date)} />
               <SummaryRow label="Уақыт" value={state.time} />
               <SummaryRow label="Тағамдар" value={selectedFoods.map((food) => food.title).join(', ')} />
@@ -394,7 +400,7 @@ export function App() {
               <motion.div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full border border-rose/30 bg-white/65 text-[#5b1b32] shadow-[0_20px_60px_rgba(91,27,50,0.22)]" animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 1.5, repeat: Infinity }}>
                 <Heart fill="currentColor" />
               </motion.div>
-              <h2 className="font-serif text-4xl leading-tight text-[#4a1629] sm:text-6xl">Онда бұл кеш ерекше болсын</h2>
+              <h2 className="font-serif text-4xl leading-tight text-[#4a1629] sm:text-6xl">Онда бұл серуен ерекше болсын</h2>
               <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-[#6d3145]">Таңдауың сақталды. Енді бұл кездесуді асыға күтемін.</p>
               <Button variant="secondary" onClick={reset} className="mt-9 border-rose/30 bg-white/60 text-[#5b1b32] hover:bg-white/85">
                 Қайта бастау
@@ -480,14 +486,14 @@ function SummaryScreen({
     <PageTransition key="summary">
       <div className="relative w-full">
         <CelebrationBurst />
-        <Panel icon={<Heart />} title="Кездесуіміз дайын" subtitle="Кафе таңдалды. Енді бәрі әдемі дайын сияқты.">
+        <Panel icon={<Heart />} title="Рақмееет" subtitle="Динара">
           <SummaryRow label="Күн" value={formatDate(date)} />
           <SummaryRow label="Уақыт" value={time} />
           <SummaryRow label="Тағамдар" value={foods.map((food) => food.title).join(', ')} />
           <SummaryRow label="Мейрамхана" value={restaurant?.id === 'her-choice' ? customRestaurantName : restaurant?.name ?? ''} />
           {error && <p className="mt-5 rounded-2xl border border-rose/30 bg-rose/10 px-4 py-3 text-sm text-[#7c2d48]">{error}</p>}
           <Button disabled={sending} onClick={onConfirm} className="mt-6 w-full bg-[#5b1b32] text-white hover:bg-[#6d203c]">
-            {sending ? 'Жіберілуде...' : 'Кездесуді растау'} <Send size={17} />
+            {sending ? 'Жіберілуде...' : 'Жіберу'} <Send size={17} />
           </Button>
         </Panel>
       </div>
@@ -758,12 +764,42 @@ function CalendarPicker({ selectedDate, onSelect }: { selectedDate: string; onSe
 }
 
 function Header({ icon, title, subtitle }: { icon: ReactNode; title: string; subtitle: string }) {
+  const hasRestaurantSticker = title.includes('ресторан') || title.includes('СЂРµСЃС‚РѕСЂР°РЅ');
+
   return (
     <div className="text-center">
+      {hasRestaurantSticker && <RestaurantSticker />}
       <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full border border-rose/25 bg-white/60 text-[#5b1b32] shadow-sm backdrop-blur-xl sm:mb-5 sm:h-12 sm:w-12">{icon}</div>
       <h2 className="font-serif text-[2rem] leading-tight text-[#4a1629] sm:text-6xl">{title}</h2>
       <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#6d3145] sm:mt-4 sm:text-base sm:leading-7">{subtitle}</p>
     </div>
+  );
+}
+
+function RestaurantSticker() {
+  return (
+    <motion.div
+      className="relative mx-auto mb-4 flex h-24 w-24 items-center justify-center sm:mb-6 sm:h-28 sm:w-28"
+      initial={{ opacity: 0, scale: 0.9, y: 10 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <div className="absolute inset-0 rounded-[2rem] bg-white/70 shadow-[0_18px_55px_rgba(137,50,78,0.2)] backdrop-blur-xl" />
+      <div className="absolute inset-2 rounded-[1.55rem] border border-rose/20" />
+      <motion.div
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#5b1b32] text-white shadow-lg sm:h-16 sm:w-16"
+        animate={{ y: [0, -4, 0], rotate: [0, -3, 3, 0] }}
+        transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Utensils size={28} strokeWidth={1.8} />
+      </motion.div>
+      <span className="absolute -right-1 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#fff6df] text-[#9b6b18] shadow-sm">
+        <Sparkles size={16} strokeWidth={1.8} />
+      </span>
+      <span className="absolute bottom-2 left-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#ffdce7] text-[#9b3857] shadow-sm">
+        <Heart size={16} fill="currentColor" strokeWidth={1.8} />
+      </span>
+    </motion.div>
   );
 }
 
